@@ -58,3 +58,17 @@ h1 {
     text-shadow: 2px 2px #000, 4px 4px #ff6600;
 }
 
+/* For screens smaller than 768px (tablets & phones) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;   /* stack elements vertically */
+    align-items: center;
+  }
+}
+
+/* For very small screens (phones <480px) */
+@media (max-width: 480px) {
+  .container {
+    margin-top: 10px;
+    padding: 5px;
+  }
