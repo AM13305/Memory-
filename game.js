@@ -78,7 +78,7 @@ $('.card').click(function(event){
                 });
 
             }
-                },150);
+                },50);
 
         }
         else 
@@ -100,3 +100,4 @@ $('.card').click(function(event){
     }
 
 });
+
