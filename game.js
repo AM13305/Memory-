@@ -78,7 +78,7 @@ $('.card').click(function(event){
                 });
 
             }
-                },500);
+                },150);
 
         }
         else 
@@ -98,4 +98,5 @@ $('.card').click(function(event){
     document.getElementById(index1+'*').setAttribute('src','./assests/'+gridcards[index1]+'.png');
     selectedCards++;
     }
+
 });
