@@ -4,22 +4,43 @@ body {
   background-color: #122831;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  gap: 10px;
-  max-width: 480px; /* keeps it neat on desktop */
-  margin: 0 auto;
+/* Game Title */
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #ffcc00;
+  text-shadow: 2px 2px #000, 4px 4px #ff6600;
+  margin: 20px 10px;
+  animation: glow 1.5s ease-in-out infinite alternate;
 }
 
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px #000, 4px 4px #ff6600;
+  }
+}
+
+/* Container */
 .container {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 10px;
 }
 
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 460px; /* fits nicely on desktop */
+  margin: 0 auto;
+}
+
+/* Card Style */
 .card {
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -31,6 +52,7 @@ body {
 
 .card img {
   width: 100%;
+  max-width: 100px;  /* prevents cards from being too big on desktop */
   border-radius: 15px;
   transition: transform 0.4s ease, opacity 0.4s ease;
   backface-visibility: hidden;
@@ -42,26 +64,56 @@ body {
   opacity: 0;
 }
 
-h1 {
+/* Timer */
+#Timer {
+  margin-top: 15px;
   font-family: 'Press Start 2P', cursive;
-  font-size: clamp(1.5rem, 4vw, 3rem); /* scales smoothly */
-  text-align: center;
+  font-size: 1.3rem;
   color: #ffcc00;
   text-shadow: 2px 2px #000, 4px 4px #ff6600;
-  margin-top: 20px;
-  animation: glow 1.5s ease-in-out infinite alternate;
+  text-align: center;
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 2px 2px #000, 4px 4px #ff6600;
+/* 📱 Tablet (≤768px) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* keep 4x4 look */
+    max-width: 360px;
+  }
+
+  .card img {
+    max-width: 80px;
+  }
+
+  #Timer {
+    font-size: 1.1rem;
   }
 }
 
-#Timer {
-  margin-left: 20px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: clamp(1rem, 2vw, 1.5rem); /* adjusts with screen */
-  color: #ffcc00;
-  text-shadow: 2px 2px #000, 4px 4px #ff6600;
+/* 📱 Small Phones (≤480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+    margin: 15px 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 300px;
+    gap: 8px;
+  }
+
+  .card img {
+    max-width: 65px;
+    border-radius: 10px;
+  }
+
+  #Timer {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
 }
