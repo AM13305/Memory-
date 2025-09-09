@@ -44,60 +44,60 @@ function startTimer() {
 }
 // To stop timer: clearInterval(timerInterval);
 
+let isBusy = false; // new flag
+
 $('.card').click(function(event){
+    if (isBusy) return;            // ⛔ ignore clicks while busy
     if (!timerInterval) startTimer(); // start only once
-    if(selectedCards===1)
-    {
-        index2=$(this).attr('id');
-        document.getElementById(index2+'*').setAttribute('src','./assests/'+gridcards[index2]+'.png');
-        if(index2!=index1)
-        {
-        if(gridcards[index1]===gridcards[index2])
-        {
+
+    if (selectedCards === 1) {
+        index2 = $(this).attr('id');
+        document.getElementById(index2+'*')
+            .setAttribute('src','./assests/'+gridcards[index2]+'.png');
+
+        if (index2 != index1) {
+            if (gridcards[index1] === gridcards[index2]) {
+                // ✅ Match found
                 setTimeout(function() {
-            document.getElementById(index1).style.visibility='hidden';
-            document.getElementById(index2).style.visibility='hidden';
-            remainingcard-=2;
-            if(remainingcard===0)
-            {
-                document.querySelector('h1').innerHTML = "You Won, press Enter to play again";
+                    document.getElementById(index1).style.visibility='hidden';
+                    document.getElementById(index2).style.visibility='hidden';
+                    remainingcard -= 2;
+                    if (remainingcard === 0) {
+                        document.querySelector('h1').innerHTML = "You Won, press Enter to play again";
 
-                let image = document.createElement('img');
-                image.setAttribute('src', './assests/giphy.gif');
-                image.style.display = 'block';
-                image.style.margin = '20px auto';
+                        let image = document.createElement('img');
+                        image.setAttribute('src', './assests/giphy.gif');
+                        image.style.display = 'block';
+                        image.style.margin = '20px auto';
 
-                document.querySelector('h1').appendChild(image);
-                document.querySelector('#Timer').remove();;
-                clearInterval(timerInterval);
+                        document.querySelector('h1').appendChild(image);
+                        clearInterval(timerInterval);
+                        document.querySelector('#Timer').remove();
 
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === 'Enter') {
-                        location.reload();
+                        document.addEventListener('keydown', function (event) {
+                            if (event.key === 'Enter') location.reload();
+                        });
                     }
-                });
-
+                }, 200);
+            } else {
+                // ❌ Wrong pair
+                isBusy = true; // lock clicks
+                setTimeout(function() {
+                    document.getElementById(index1+'*')
+                        .setAttribute('src','./assests/kisspng-paper-tile-sticker-clip-art-play-illustration-5b2c93be07a202.9251300215296480620313.jpg');
+                    document.getElementById(index2+'*')
+                        .setAttribute('src','./assests/kisspng-paper-tile-sticker-clip-art-play-illustration-5b2c93be07a202.9251300215296480620313.jpg');
+                    isBusy = false; // unlock clicks
+                }, 500);
             }
-                },50);
-
+            selectedCards = 0;
         }
-        else 
-        {
-
-             setTimeout(function() {
-            document.getElementById(index1+'*').setAttribute('src','./assests/kisspng-paper-tile-sticker-clip-art-play-illustration-5b2c93be07a202.9251300215296480620313.jpg');
-            document.getElementById(index2+'*').setAttribute('src','./assests/kisspng-paper-tile-sticker-clip-art-play-illustration-5b2c93be07a202.9251300215296480620313.jpg');
-            },500);
-        }
-        selectedCards=0;
-        }
-
+    } else {
+        index1 = $(this).attr('id');
+        document.getElementById(index1+'*')
+            .setAttribute('src','./assests/'+gridcards[index1]+'.png');
+        selectedCards++;
     }
-    else {
-    index1=$(this).attr('id');
-    document.getElementById(index1+'*').setAttribute('src','./assests/'+gridcards[index1]+'.png');
-    selectedCards++;
-    }
-
 });
+
 
